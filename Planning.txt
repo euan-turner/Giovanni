@@ -1,0 +1,14 @@
+I can accept orders
+I can present a list of orders
+
+
+2 1/2 mins to make a sandwich
+1 min to serve and take payment
+Take a break when no orders to make or serve
+
+3 time slots
+each time slot needs:
+sequence number
+time task
+recipient
+
