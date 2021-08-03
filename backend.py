@@ -37,32 +37,32 @@ class ServeSandwich(TimeSlot):
 
 
 ##Calculate start time
-def calculateStartTime(times):
+def calculate_start_time(times):
     if len(times) != 0:
         return times[-1].endTime
     else:
         return 0
 
-def addOrder(name,times):
-    makeSlot = MakeSandwich(calculateStartTime(TimeSlots), name)
-    TimeSlots.append(makeSlot)
-    serveSlot = ServeSandwich(calculateStartTime(TimeSlots), name)
-    TimeSlots.append(serveSlot)
-    outputSchedule(TimeSlots)
+def add_order(name,times):
+    makeSlot = MakeSandwich(calculate_start_time(time_slots), name)
+    time_slots.append(makeSlot)
+    serveSlot = ServeSandwich(calculate_start_time(time_slots), name)
+    time_slots.append(serveSlot)
+    output_schedule(time_slots)
 
 ##Test output
-def outputSchedule(times):
+def output_schedule(times):
     print("\n")
-    for i in range(len(TimeSlots)):
-        print(f'{i+1}. {TimeSlots[i]}')
+    for i in range(len(time_slots)):
+        print(f'{i+1}. {time_slots[i]}')
     print("Take a break\n")
 
 ##Container for all time slots
-TimeSlots = []
+time_slots = []
 
 ##Test on 3 inputs
 for _ in range(3):
     name = input("Input name:")
-    addOrder(name, TimeSlots)
+    add_order(name, time_slots)
     
 
