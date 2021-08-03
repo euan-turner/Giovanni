@@ -1,4 +1,4 @@
-I can accept orders
+I can accept orders - assuming no sandwich type, assuming asap timing
 I can present a list of orders
 
 
@@ -9,6 +9,31 @@ Take a break when no orders to make or serve
 3 time slots
 each time slot needs:
 sequence number
-time task
+time 
+task
 recipient
 
+
+
+
+Time-Slot class:
+attributes - sequence number, start time, task
+
+Child classes:
+Make - start time, end time, duration = 2.5, recipient
+Serve - start time, end time, duration = 1, recipient
+Break - start time, duration - infinite (assuming will always be at the end of the schedule)
+
+Store all time slot instances in an ordered list
+
+
+Constantly update output, as soon as an order comes in - gui has entry and button for giving an order, with window for displaying orders on the side
+
+
+
+offset time from start - not real time
+------------              |Time|Action|(name)|
+|(Enter name)|            |
+------------              |
+|Enter Order|             |
+------------              |
