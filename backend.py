@@ -43,6 +43,13 @@ def calculateStartTime(times):
     else:
         return 0
 
+def addOrder(name,times):
+    makeSlot = MakeSandwich(calculateStartTime(TimeSlots), name)
+    TimeSlots.append(makeSlot)
+    serveSlot = ServeSandwich(calculateStartTime(TimeSlots), name)
+    TimeSlots.append(serveSlot)
+    outputSchedule(TimeSlots)
+
 ##Test output
 def outputSchedule(times):
     print("\n")
@@ -56,9 +63,6 @@ TimeSlots = []
 ##Test on 3 inputs
 for _ in range(3):
     name = input("Input name:")
-    makeSlot = MakeSandwich(calculateStartTime(TimeSlots), name)
-    TimeSlots.append(makeSlot)
-    serveSlot = ServeSandwich(calculateStartTime(TimeSlots), name)
-    TimeSlots.append(serveSlot)
-    outputSchedule(TimeSlots)
+    addOrder(name, TimeSlots)
+    
 
