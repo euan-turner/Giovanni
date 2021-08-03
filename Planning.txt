@@ -8,16 +8,16 @@ Take a break when no orders to make or serve
 
 3 time slots
 each time slot needs:
-sequence number
+sequence number - can just be the index in the list
 time 
-task
+task - can track using class type or global
 recipient
 
 
 
 
 Time-Slot class:
-attributes - sequence number, start time, task
+attributes - sequence number, start time, #task
 
 Child classes:
 Make - start time, end time, duration = 2.5, recipient
