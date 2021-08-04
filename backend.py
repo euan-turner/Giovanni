@@ -54,7 +54,6 @@ def add_order(name,times):
     times.append(makeSlot)
     serveSlot = ServeSandwich(calculate_start_time(times), name)
     times.append(serveSlot)
-    output_schedule(times)
 
 ##Test output
 def output_schedule(times):
@@ -68,16 +67,5 @@ def generate_string(times):
     string += f'{len(times)+1}. Take a break\n'
     return string
 
-##Container for all time slots
-# time_slots = []
-
-def test():
-    time_slots = []
-    ##Test on 3 inputs
-    for _ in range(3):
-        name = input("Input name:")
-        add_order(name, time_slots)
-
-##test()
     
 
