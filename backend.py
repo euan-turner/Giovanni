@@ -1,4 +1,6 @@
 class TimeSlot():
+    """Parent class for all time slots
+    """    
 
     def __init__(self, startTime, recipient):
         self.recipient = recipient
@@ -15,6 +17,8 @@ class TimeSlot():
 
 
 class MakeSandwich(TimeSlot):
+    """Time slot to make a sandwich, duration = 2.5
+    """    
 
     def __init__(self, startTime, recipient):
         super().__init__(startTime, recipient)
@@ -26,6 +30,8 @@ class MakeSandwich(TimeSlot):
 
 
 class ServeSandwich(TimeSlot):
+    """Time slot to serve a sandwich, duration = 1
+    """    
 
     def __init__(self, startTime, recipient):
         super().__init__(startTime, recipient)
@@ -44,25 +50,34 @@ def calculate_start_time(times):
         return 0
 
 def add_order(name,times):
-    makeSlot = MakeSandwich(calculate_start_time(time_slots), name)
-    time_slots.append(makeSlot)
-    serveSlot = ServeSandwich(calculate_start_time(time_slots), name)
-    time_slots.append(serveSlot)
-    output_schedule(time_slots)
+    makeSlot = MakeSandwich(calculate_start_time(times), name)
+    times.append(makeSlot)
+    serveSlot = ServeSandwich(calculate_start_time(times), name)
+    times.append(serveSlot)
+    output_schedule(times)
 
 ##Test output
 def output_schedule(times):
-    print("\n")
-    for i in range(len(time_slots)):
-        print(f'{i+1}. {time_slots[i]}')
-    print("Take a break\n")
+    print(generate_string(times))
+
+##Generate string output in one variable
+def generate_string(times):
+    string = '\n'
+    for i in range(len(times)):
+        string += f'{i+1}. {times[i]}\n'
+    string += f'{len(times)+1}. Take a break\n'
+    return string
 
 ##Container for all time slots
-time_slots = []
+# time_slots = []
 
-##Test on 3 inputs
-for _ in range(3):
-    name = input("Input name:")
-    add_order(name, time_slots)
+def test():
+    time_slots = []
+    ##Test on 3 inputs
+    for _ in range(3):
+        name = input("Input name:")
+        add_order(name, time_slots)
+
+##test()
     
 
