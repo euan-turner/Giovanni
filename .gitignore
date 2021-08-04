@@ -1,2 +1,5 @@
 #Ignore pycache
 __pycache__/
+
+#Ignore pytest_cache
+.pytest_cache/
