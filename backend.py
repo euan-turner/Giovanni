@@ -61,7 +61,7 @@ def output_schedule(times):
 
 ##Generate string output in one variable
 def generate_string(times):
-    string = '\n'
+    string = ''
     for i in range(len(times)):
         string += f'{i+1}. {times[i]}\n'
     string += f'{len(times)+1}. Take a break\n'
