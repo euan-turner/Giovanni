@@ -7,13 +7,13 @@ def submit():
     name = name_entry.get()
     backend.add_order(name, TIME_SLOTS)
     new_schedule = backend.generate_string(TIME_SLOTS)
-    output_label.configure(text = new_schedule)
-
+    output_label.delete(1.0,END)
+    output_label.insert(1.0,new_schedule)
 
 root = Tk()
-root.geometry("300x300")
+root.geometry("600x425")
 root.title("Giovanni's Cafe")
-root.resizable(True, True)
+root.resizable(False, False)
 root.configure(background = "Light Blue")
 
 ##Inputs
@@ -30,8 +30,15 @@ submit_button.grid(row = 1, column = 0, padx = 5, pady = 5)
 output_frame = Frame(root)
 output_frame.grid(row = 0, column = 1, padx = 10, pady = 10)
 
-output_label = Label(output_frame, text = '')
-output_label.grid(row = 0, column = 0, padx = 5, pady = 5)
+sb = Scrollbar(
+    output_frame,
+    orient=VERTICAL
+)
+sb.pack(side = RIGHT, fill = Y)
 
+output_label = Text(output_frame, height = 25, width = 50,yscrollcommand = sb.set)
+output_label.pack(side = LEFT)
+
+sb.config(command=output_label.yview)
 
 root.mainloop()
