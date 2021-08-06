@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 class TimeSlot():
     """Parent class for all time slots
     """    
@@ -7,39 +9,39 @@ class TimeSlot():
         self.startTime = startTime
 
 
-    def formatTime(self):
-        ##Turn self.startTime into a usable time string
-        if self.startTime%1 == 0:
-            ##Time is an integer
-            return f'{int(self.startTime)} mins'
-        else:
-            return f'{int(self.startTime)} mins {int((self.startTime%1)*60)} secs'
+    def format_time(self):
+        return self.startTime.strftime('%H:%M:%S')
 
 
 class MakeSandwich(TimeSlot):
     """Time slot to make a sandwich, duration = 2.5
-    """    
+    """
+    duration = timedelta(minutes = 2.5)
+    task = "Make for: "
 
     def __init__(self, startTime, recipient):
         super().__init__(startTime, recipient)
-        self.duration = 2.5
         self.endTime = self.startTime + self.duration
 
+
     def __str__(self):
-        return f'Make sandwich for {self.recipient} at {self.formatTime()}'
+        return f'\t{self.format_time()}\t\tMake for:\t\t{self.recipient}'
+        ##return f'Make sandwich for {self.recipient} at {self.format_time()}'
 
 
 class ServeSandwich(TimeSlot):
     """Time slot to serve a sandwich, duration = 1
-    """    
+    """
+    duration = timedelta(minutes = 1)
+    task = "Serve to: "
 
     def __init__(self, startTime, recipient):
         super().__init__(startTime, recipient)
-        self.duration = 1
         self.endTime = self.startTime + self.duration
     
     def __str__(self):
-        return f'Serve sandwich to {self.recipient} at {self.formatTime()}'
+        ##return f'Serve sandwich to {self.recipient} at {self.format_time()}'
+        return f'\t{self.format_time()}\t\tServe to:\t\t{self.recipient}'
 
 
 ##Calculate start time
@@ -47,7 +49,7 @@ def calculate_start_time(times):
     if len(times) != 0:
         return times[-1].endTime
     else:
-        return 0
+        return datetime.now()
 
 def add_order(name,times):
     makeSlot = MakeSandwich(calculate_start_time(times), name)
@@ -57,15 +59,17 @@ def add_order(name,times):
 
 ##Test output
 def output_schedule(times):
-    print(generate_string(times))
+    print(generate_strings(times))
 
 ##Generate string output in one variable
-def generate_string(times):
-    string = ''
+def generate_strings(times):
+    strings = []
+    strings.append(['No.', 'Time', 'Task', 'Customer'])
     for i in range(len(times)):
-        string += f'{i+1}. {times[i]}\n'
-    string += f'{len(times)+1}. Take a break\n'
-    return string
+        strings.append([str(i+1), times[i].format_time(), times[i].task, times[i].recipient])
+    takeBreak = TimeSlot(calculate_start_time(times), '')
+    strings.append([str(len(times)+1), takeBreak.format_time(), "Take break", '-'])
+    return strings
 
     
 
